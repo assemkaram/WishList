@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.3"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-brand: #ff2e00;
+        --color-ink: #262626;
+        --color-muted: #555555;
+        --color-page: #f3f4f8;
+        --color-line: #e4e6ee;
+        --font-sans: "Lato", sans-serif;
+      }
+
+      @layer components {
+        .wish {
+          @apply flex items-center gap-3 rounded-xl border border-line bg-white py-3 pr-3 pl-4 text-ink transition-colors hover:border-brand/40;
+        }
+        .wish::before {
+          content: "\2665";
+          @apply text-xl leading-none text-line transition-colors;
+        }
+        .wish:hover::before {
+          @apply text-brand;
+        }
+        .wish span {
+          @apply flex-1 text-base font-bold break-words;
+        }
+        .wish__remove {
+          @apply grid size-8 shrink-0 cursor-pointer place-items-center rounded-full text-xl leading-none text-muted transition-colors hover:bg-brand hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-page font-sans text-ink antialiased">
+    <main
+      class="mx-auto flex min-h-screen max-w-xl items-center px-4 py-10 sm:px-6"
+    >
+      <section
+        class="wishlist w-full rounded-2xl border border-line bg-white p-5 shadow-xl shadow-ink/5 sm:p-8"
+      >
+        <header class="flex items-center justify-between gap-4">
+          <h1 class="text-3xl font-black sm:text-4xl">My wishlist</h1>
+          <p
+            class="shrink-0 rounded-full bg-brand px-3.5 py-1 text-sm font-bold text-white"
+          >
+            <span id="countLabel">3</span> wishes
+          </p>
+        </header>
+
+        <form id="addForm" class="mt-6 flex flex-col gap-3 sm:flex-row">
+          <label for="wishInput" class="sr-only">New wish</label>
+          <input
+            id="wishInput"
+            type="text"
+            placeholder="What do you wish for?"
+            autocomplete="off"
+            class="h-12 min-w-0 flex-1 rounded-xl border border-line bg-page px-4 text-base outline-none transition placeholder:text-muted/60 focus:border-brand focus:bg-white focus:ring-4 focus:ring-brand/15"
+          />
+          <button
+            type="submit"
+            class="h-12 cursor-pointer rounded-xl bg-ink px-7 text-base font-bold text-white transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          >
+            Add wish
+          </button>
+        </form>
+
+        <button
+          id="clearBtn"
+          type="button"
+          class="mt-4 cursor-pointer text-sm font-bold text-muted transition-colors hover:text-brand"
+        >
+          Clear all
+        </button>
+
+        <ul id="wishItems" class="mt-6 flex flex-col gap-2.5">
+          <!-- <li class="wish" data-id="1">
+            <span>Laptop</span>
+            <button class="wish__remove" type="button" aria-label="delete">&times;</button>
+          </li>
+          <li class="wish" data-id="2">
+            <span>Headphones</span>
+            <button class="wish__remove" type="button" aria-label="delete">&times;</button>
+          </li>
+          <li class="wish" data-id="3">
+            <span>Camera</span>
+            <button class="wish__remove" type="button" aria-label="delete">&times;</button>
+          </li> -->
+        </ul>
+
+        <div
+          id="emptyState"
+          class="hidden rounded-xl border border-dashed border-line px-6 py-10 text-center"
+        >
+          <svg
+            class="mx-auto size-14 text-brand"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 20.5s-8-4.6-8-10.2A4.3 4.3 0 0 1 12 7.9a4.3 4.3 0 0 1 8 2.4c0 5.6-8 10.2-8 10.2Z"
+            />
+          </svg>
+          <h2 class="mt-4 text-lg font-black">Your wishlist is empty</h2>
+          <p class="mt-1 text-sm text-muted">
+            Type a wish above and press Add wish.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
